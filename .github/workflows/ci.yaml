@@ -1,0 +1,26 @@
+name: Deploy
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code # clone my repo to github machine
+        uses: actions/checkout@v2
+
+      - name: SSH and Deploy
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          EC2_URL: ${{ secrets.EC2_URL }}
+        run: |
+          echo "$SSH_PRIVATE_KEY" > keyfile
+          chmod 600 keyfile
+          mkdir -p ~/.ssh
+          ssh-keyscan $EC2_URL >> known_hosts
+          cp known_hosts ~/.ssh/known_hosts
+          ssh -t -i keyfile ubuntu@$EC2_URL "sudo bash ~/deploy.sh"
