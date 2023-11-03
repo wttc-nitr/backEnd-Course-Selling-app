@@ -23,4 +23,4 @@ jobs:
           mkdir -p ~/.ssh
           ssh-keyscan $EC2_URL >> known_hosts
           cp known_hosts ~/.ssh/known_hosts
-          ssh -T -i keyfile ubuntu@$EC2_URL "sudo bash ~/deploy.sh"
+          ssh -i keyfile ubuntu@$EC2_URL "sudo bash ~/deploy.sh"
