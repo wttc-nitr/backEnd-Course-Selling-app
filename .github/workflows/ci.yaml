@@ -13,7 +13,7 @@ jobs:
       - name: Checkout code # clone my repo to github machine
         uses: actions/checkout@v2
 
-      - name: SSH and Deploy
+      - name: SSH and Deploy # ssh from github machine to my ec2
         env:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
           EC2_URL: ${{ secrets.EC2_URL }}
