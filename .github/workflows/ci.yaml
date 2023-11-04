@@ -18,7 +18,7 @@ jobs:
           SSH_SECRET_KEY: ${{ secrets.SSH_SECRET_KEY }}
           EC2_URL: ${{ secrets.EC2_URL }}
         run: |
-          echo "$SSH_SECRET_KEY" > keyfile
+          echo $SSH_SECRET_KEY > keyfile
           chmod 600 keyfile
           mkdir -p ~/.ssh
           ssh-keyscan $EC2_URL >> known_hosts
